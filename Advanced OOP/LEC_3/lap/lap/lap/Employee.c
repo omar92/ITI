@@ -47,7 +47,14 @@ void main() {
 
 
 	employeeList = (struct employee*) malloc(sizeof(struct employee)*employeeNum);
-	struct employee *employeePtr = employeeList;
+	//	struct employee *employeePtr = employeeList;
+
+		//set defult keys to -1;
+	int i = 0;
+	for (; i < employeeNum; i++)
+	{
+		(employeeList + i)->code = -1;
+	}
 	printf("%d slots created \nPress any key to continue\n", employeeNum);
 
 	getInput();
@@ -183,6 +190,7 @@ void addEmployeeProg(struct employee *employeeList, int length) {
 		scanf("%d", &descision);
 
 		if (descision <= length) {
+			empData.code = descision;
 			employeeList[descision - 1] = empData;
 			descision = 0;
 		}
@@ -195,11 +203,19 @@ void displayEmployeeProg(struct employee *employeeList, int length) {
 	int descision;
 	do
 	{
-		printf("\nEnter slot number (1 -> %d)\nEnter 0 to quit\n", length);
+		int i = 0;
+		for (; i < length; i++)
+		{
+			if ((employeeList + i)->code != -1) {
+				printf("%d:\t%s\n", (employeeList + i)->code, (employeeList + i)->name);
+			}
+		}
+
+		printf("Enter slot number (1 -> %d)\nEnter 0 to quit\n", length);
 		scanf("%d", &descision);
 
-		if (descision <= length) {
-			struct employee empData= employeeList[descision - 1];
+		if (descision <= length && descision > 0) {
+			struct employee empData = employeeList[descision - 1];
 			descision = 0;
 
 
