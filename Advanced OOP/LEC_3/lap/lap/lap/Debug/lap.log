@@ -1,12 +1,12 @@
 ﻿  Employee.c
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(53): warning C4013: 'getInput' undefined; assuming extern returning int
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(111): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(60): warning C4013: 'getInput' undefined; assuming extern returning int
+d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(118): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(156): warning C4133: 'function': incompatible types - from 'int *' to 'char *'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(156): warning C4133: 'function': incompatible types - from 'int *' to 'const char *'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(278): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(163): warning C4133: 'function': incompatible types - from 'int *' to 'char *'
+d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(163): warning C4133: 'function': incompatible types - from 'int *' to 'const char *'
+d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(294): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(282): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(298): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
   lap.vcxproj -> D:\ITI\Advanced OOP\LEC_3\lap\lap\Debug\lap.exe
   lap.vcxproj -> D:\ITI\Advanced OOP\LEC_3\lap\lap\Debug\lap.pdb (Full PDB)
