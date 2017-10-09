@@ -18,6 +18,12 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="factorialLoop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Employee.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ITI.h">

@@ -12,6 +12,17 @@
 #include <conio.h>
 #endif
 
+
+#define UP 72
+#define DOWN 80
+#define RIGHT 77
+#define LEFT 75
+#define HOME 71
+#define END 79
+#define ENTER 13 
+#define ESC 27
+#define EXTENDED -32
+
 void gotoxy(int x, int y) {
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);

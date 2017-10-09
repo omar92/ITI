@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Employee.c" />
+    <ClCompile Include="factorialLoop.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
