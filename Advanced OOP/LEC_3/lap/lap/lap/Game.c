@@ -1,10 +1,10 @@
 #include "ITI.h"
 
 
-#define MenuLength  2
 #define mapDimention  10 
 #define firstGame 0
-#define Exit 1
+#define edirLevel 1
+#define Exit 2
 
 struct point
 {
@@ -12,76 +12,113 @@ struct point
 	int y;
 };
 
+struct menuItem {
+	char name[20];
+	void(*callBack)(int*);
+};
+
 //Variables --------------------------------------------------------------------------------------------------
-char menu[MenuLength][20] = { "first game" ,"Exit" };
 int selected = 0;
-int QuitFlag = 0;
 char **map;
-struct point playerPos;
+struct point playerinitPos;
+struct point goal;
+
 
 
 //functions  --------------------------------------------------------------------------------------------------
 int getInput();
-void drawMenu();
-void handleSelected(int selected);
+void drawMenu(struct menuItem *menu, int length);
+void mainMenuProg();
+void EditMenuProg();
 void firstGameProg();
+void newLevelProg();
 void lvlEditorProg();
+void initMap(int height, int width);
 void initDefultMap();
+struct menuItem* generateMainMenu(int *menuLength);
+struct menuItem* generateEditorMenu(int *menuLength);
+void drawMap(struct point playerPos);
+int MenuProg(struct menuItem *menu, int length);
+int isPointEqual(struct point a, struct point b);
+void quitMenu(int* quitFlag);
+
+
 void main() {
 	initDefultMap();
+	mainMenuProg();
+}
+
+void  mainMenuProg() {
+	int quit = 0;
 	do
 	{
-		drawMenu();
+		int menuLength = 0;
+		struct menuItem* menu = generateMainMenu(&menuLength);
+		quit = MenuProg(menu, menuLength);
+	} while (!quit);
+}
 
-		//handle input
-		switch (getInput())
-		{//"\t"
+void EditMenuProg() {
+	int  quitFlag = 0;
+	do
+	{
+		int menuLength = 0;
+		struct menuItem* menu = generateEditorMenu(&menuLength);
+		quitFlag = MenuProg(menu, menuLength);
+	} while (!quitFlag);
+}
 
-		case UP:
+int MenuProg(struct menuItem *menu, int length) {
+	int quit = 0;
+	drawMenu(menu, length);
+	//handle input
+	switch (getInput())
+	{//"\t"
+
+	case UP:
+	{
+		selected = (--selected >= 0 ? selected : length + selected) % length;
+	}
+	break;
+	case DOWN:
+	{
+		selected = ++selected%length;
+	}
+	break;
+	case HOME:
+	{
+		selected = 0;
+	}
+	break;
+	case END:
+	{
+		selected = length - 1;
+	}
+
+	case ENTER: {
+		clrscr();
+
+		//handle selected
+		//(selected);
+		menu[selected].callBack(&quit);
+
+		if (selected != Exit)
 		{
-			selected = (--selected >= 0 ? selected : MenuLength + selected) % MenuLength;
+			printf("Press any key to continue \n");
+			getch();
 		}
+	}
+				break;
+	case ESC:
+	{
+		printf("ESC");
+		quit = 1;
+	}
+	break;
+	default:
 		break;
-		case DOWN:
-		{
-			selected = ++selected%MenuLength;
-		}
-		break;
-		case HOME:
-		{
-			selected = 0;
-		}
-		break;
-		case END:
-		{
-			selected = MenuLength - 1;
-		}
-
-		case ENTER: {
-			clrscr();
-
-			//handle selected
-			handleSelected(selected);
-
-			if (selected != Exit)
-			{
-				printf("Press any key to continue \n");
-				getch();
-			}
-		}
-					break;
-		case ESC:
-		{
-			printf("ESC");
-			QuitFlag = 1;
-		}
-		break;
-		default:
-			break;
-		}
-
-	} while (!QuitFlag);
-
+	}
+	return quit;
 }
 
 int getInput() {
@@ -94,47 +131,97 @@ int getInput() {
 	return userInput;
 }
 
-void drawMenu() {
+struct menuItem* generateMainMenu(int *menuLength) {
+	struct menuItem* menuPtr;
+	struct menuItem* ptr;
+	*menuLength = 3;
+	menuPtr = (struct menuItem*) malloc(sizeof(struct menuItem)* (*menuLength));
+	ptr = menuPtr;
+
+	strcpy(&(ptr->name), "PLay");
+	ptr->callBack = &firstGameProg;
+
+	ptr++;
+	strcpy(&(ptr->name), "Edit level");
+	ptr->callBack = &EditMenuProg;
+
+	ptr++;
+	strcpy(&(ptr->name), "Exit");
+	ptr->callBack = &quitMenu;
+
+
+	return menuPtr;
+}
+
+struct menuItem* generateEditorMenu(int *menuLength) {
+	struct menuItem* menuPtr;
+	struct menuItem* ptr;
+	*menuLength = 3;
+	menuPtr = (struct menuItem*) malloc(sizeof(struct menuItem)* (*menuLength));
+	ptr = menuPtr;
+
+	strcpy(&(ptr->name), "New");
+	ptr->callBack = &newLevelProg;
+
+	ptr++;
+	strcpy(&(ptr->name), "Edit");
+	ptr->callBack = &lvlEditorProg;
+
+	ptr++;
+	strcpy(&(ptr->name), "return");
+	ptr->callBack = &quitMenu;
+
+
+	return menuPtr;
+}
+void drawMenu(struct menuItem *menu, int menuLength) {
 
 	//draw menu 
 	clrscr();
-	for (int i = 0; i < MenuLength; i++)
+	for (int i = 0; i < menuLength; i++)
 	{
 		if (i == selected) {
-			putsHighlighted(menu[i]);
+			putsHighlighted(menu[i].name);
 		}
 		else
 		{
-			puts(menu[i]);
+			puts(menu[i].name);
 		}
 	}
 
 }
 
-void handleSelected(int selected) {
-	switch (selected)
-	{
-	case firstGame:
-	{
-		firstGameProg();
-	}
-	break;
-	case Exit:
-	{
-		QuitFlag = 1;
-
-	}
-	break;
-
-	default:
-		break;
-	}
-
+void quitMenu(int* quitFlag) {
+	*quitFlag = 1;
 }
 
+
 void initDefultMap() {
+
 	int height = 10;
 	int width = 10;
+
+	initMap(height , width);
+
+	map[0][1] = 1;
+	map[2][0] = 1;
+	map[4][4] = 1;
+	map[3][9] = 1;
+	map[6][6] = 1;
+	map[7][5] = 1;
+	map[9][8] = 1;
+	goal.x = 0;
+	goal.y = 0;
+
+	playerinitPos.x = 7;
+	playerinitPos.y = 6;
+}
+
+void initMap(int height,int width) {
+	free(map);
+
+
+
 	map = (char**)malloc(sizeof(char*)*height);
 	for (int i = 0; i < height; i++)
 	{
@@ -149,65 +236,72 @@ void initDefultMap() {
 			map[y][x] = 0;
 		}
 	}
-	map[0][1] = 1;
-	map[2][0] = 1;
-	map[4][4] = 1;
-	map[3][9] = 1;
-	map[6][6] = 1;
-	map[7][5] = 1;
-	map[9][8] = 1;
-	map[0][0] = 2;
-
-	playerPos.x = 7;
-	playerPos.y = 6;
+}
+void newLevelProg() {
+	int height = 0;
+	int width = 0;
+	printf("Enter map width:\n");
+	scanf("%d", &width);
+	printf("Enter map height:\n");
+	scanf("%d", &height);
+	initMap(height,width);
+	lvlEditorProg();
 }
 
-
 void lvlEditorProg() {
+	int quitFlag = 0;
+	do
+	{
 
+		drawMap(playerinitPos);
+		printf("\n1: block 2: player 3:goal\n");
+
+
+	} while (!quitFlag);
+}
+
+void drawMap(struct point playerPos) {
+	//draw map
+	int x, y;
+	clrscr();
+	for (y = 0; y < mapDimention; y++)
+	{
+		for (x = 0; x < mapDimention; x++)
+		{
+			if (playerPos.x == x && playerPos.y == y) {
+				printHighlighted(":-)");
+			}
+			else if (goal.x == x && goal.y == y) {
+				printf("(W)");
+			}
+			else
+			{
+				switch (map[x][y])
+				{
+				case 0:
+					printf("| |");
+					break;
+				case 1:
+					printf("|X|");
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		printf("\n");
+	}
 }
 
 void firstGameProg() {
 
+	//	int gameMap[mapDimention][mapDimention] = { 0 };
 
-
-
-
-//	int gameMap[mapDimention][mapDimention] = { 0 };
-
+	struct point playerPos = playerinitPos;
 	int gameQuitFlag = 0;
 	do
 	{
-		//draw map
-		int x, y;
-		clrscr();
-		for (y = 0; y < mapDimention; y++)
-		{
-			for (x = 0; x < mapDimention; x++)
-			{
-				if (playerPos.x == x && playerPos.y == y) {
-					printHighlighted(":-)");
-				}
-				else
-				{
-					switch (map[x][y])
-					{
-					case 0:
-						printf("| |");
-						break;
-					case 1:
-						printf("|X|");
-						break;
-					case 2:
-						printf("(W)");
-						break;
-					default:
-						break;
-					}
-				}
-			}
-			printf("\n");
-		}
+		drawMap(playerPos);
 
 		//handle input
 		switch (getInput())
@@ -252,14 +346,18 @@ void firstGameProg() {
 		}
 
 		//check winning 
-		if (map[playerPos.x][playerPos.y] == 2) {
+		if (isPointEqual(playerPos, goal)) {
 			clrscr();
 			printf("!!!!!!!!!! Winner !!!!!!!!!!\n");
 			printf("Press any key to play again \n");
 			getch();
-			playerPos.x = 7;
-			playerPos.y = 6;
+			playerPos = playerinitPos;
 		}
 
 	} while (!gameQuitFlag);
 }
+
+int isPointEqual(struct point a, struct point b) {
+	return (a.x == b.x && a.y == b.y);
+}
+

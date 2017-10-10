@@ -145,6 +145,7 @@
     <ClCompile Include="Employee.c" />
     <ClCompile Include="factorialLoop.c" />
     <ClCompile Include="Game.c" />
+    <ClCompile Include="lineEditor.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ITI.h" />

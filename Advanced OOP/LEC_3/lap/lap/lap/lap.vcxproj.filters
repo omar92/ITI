@@ -24,6 +24,9 @@
     <ClCompile Include="Game.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lineEditor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ITI.h">
