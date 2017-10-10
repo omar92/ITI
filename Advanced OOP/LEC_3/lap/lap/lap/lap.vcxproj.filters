@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="factorialLoop.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Employee.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
