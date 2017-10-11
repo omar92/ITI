@@ -24,7 +24,10 @@
     <ClCompile Include="Game.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="swipe.c">
+    <ClCompile Include="swap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linkedList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
