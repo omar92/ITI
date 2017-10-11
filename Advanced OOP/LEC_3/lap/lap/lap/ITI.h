@@ -21,7 +21,12 @@
 #define END 79
 #define ENTER 13 
 #define ESC 27
+#define BACK_SPACE 8
 #define EXTENDED -32
+
+#define _1 49 
+#define _2 50 
+#define _3 51 
 
 void gotoxy(int x, int y) {
 
