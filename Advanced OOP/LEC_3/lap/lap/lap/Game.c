@@ -1,7 +1,7 @@
 #include "ITI.h"
 
 
-#define mapDimention  10 
+//#define mapDimention  10 
 #define firstGame 0
 #define edirLevel 1
 #define Exit 2
@@ -25,7 +25,6 @@ struct menuItem {
 
 struct gameMap
 {
-	char name[20];
 	struct point size;
 	char **map;
 	struct point startPos;
@@ -33,13 +32,13 @@ struct gameMap
 };
 
 //Variables --------------------------------------------------------------------------------------------------
-int selected = 0;
+
 struct gameMap savedMap;
 
 
 //functions  --------------------------------------------------------------------------------------------------
 int getInput();
-void drawMenu(struct menuItem *menu, int length);
+void drawMenu(struct menuItem *menu, int selected, int length);
 void mainMenuProg();
 void EditMenuProg();
 void firstGameProg();
@@ -49,11 +48,12 @@ void initMap(int height, int width);
 void initDefultMap();
 struct menuItem* generateMainMenu(int *menuLength);
 struct menuItem* generateEditorMenu(int *menuLength);
-void drawMap(struct point playerPos);
+void drawMap(struct point playerPos, char **map, struct point size);
 int MenuProg(struct menuItem *menu, int length);
 int isPointEqual(struct point a, struct point b);
 void quitMenu(int* quitFlag);
-void getPLayerGoalPos(struct point *playerPos, struct point *goalPos);
+struct gameMap *cloneLevel(struct gameMap level);
+void freeLevel(struct gameMap *level);
 
 void main() {
 	initDefultMap();
@@ -61,76 +61,72 @@ void main() {
 }
 
 void  mainMenuProg() {
-	int quit = 0;
-	do
-	{
-		int menuLength = 0;
-		struct menuItem* menu = generateMainMenu(&menuLength);
-		quit = MenuProg(menu, menuLength);
-	} while (!quit);
+	int menuLength = 0;
+	struct menuItem* menu = generateMainMenu(&menuLength);
+	MenuProg(menu, menuLength);
 }
 
 void EditMenuProg() {
-	int  quitFlag = 0;
-	do
-	{
-		int menuLength = 0;
-		struct menuItem* menu = generateEditorMenu(&menuLength);
-		quitFlag = MenuProg(menu, menuLength);
-	} while (!quitFlag);
+	int menuLength = 0;
+	struct menuItem* menu = generateEditorMenu(&menuLength);
+	MenuProg(menu, menuLength);
 }
 
 int MenuProg(struct menuItem *menu, int length) {
+	int selected = 0;
 	int quit = 0;
-	drawMenu(menu, length);
-	//handle input
-	switch (getInput())
-	{//"\t"
 
-	case UP:
+	do
 	{
-		selected = (--selected >= 0 ? selected : length + selected) % length;
-	}
-	break;
-	case DOWN:
-	{
-		selected = ++selected%length;
-	}
-	break;
-	case HOME:
-	{
-		selected = 0;
-	}
-	break;
-	case END:
-	{
-		selected = length - 1;
-	}
+		drawMenu(menu, selected, length);
+		//handle input
+		switch (getInput())
+		{//"\t"
 
-	case ENTER: {
-		clrscr();
-
-		//handle selected
-		//(selected);
-		menu[selected].callBack(&quit);
-
-		if (selected != Exit)
+		case UP:
 		{
-			printf("Press any key to continue \n");
-			getch();
+			selected = (--selected >= 0 ? selected : length + selected) % length;
 		}
-	}
-				break;
-	case ESC:
-	{
-		printf("ESC");
-		quit = 1;
-	}
-	break;
-	default:
 		break;
-	}
-	return quit;
+		case DOWN:
+		{
+			selected = ++selected%length;
+		}
+		break;
+		case HOME:
+		{
+			selected = 0;
+		}
+		break;
+		case END:
+		{
+			selected = length - 1;
+		}
+
+		case ENTER: {
+			clrscr();
+
+			//handle selected
+			//(selected);
+			menu[selected].callBack(&quit);
+
+			if (selected != Exit)
+			{
+				//	printf("\nPress any key to continue \n");
+				//	getch();
+			}
+		}
+					break;
+		case ESC:
+		{
+			quit = 1;
+		}
+		break;
+		default:
+			break;
+		}
+	} while (!quit);
+	return 0;
 }
 
 int getInput() {
@@ -186,7 +182,7 @@ struct menuItem* generateEditorMenu(int *menuLength) {
 
 	return menuPtr;
 }
-void drawMenu(struct menuItem *menu, int menuLength) {
+void drawMenu(struct menuItem *menu, int selected, int menuLength) {
 
 	//draw menu 
 	clrscr();
@@ -215,39 +211,64 @@ void initDefultMap() {
 
 	initMap(savedMap.size.y, savedMap.size.x);
 
-	savedMap.map[0][1] = block;
-	savedMap.map[2][0] = block;
+	savedMap.map[1][0] = block;
+	savedMap.map[0][2] = block;
 	savedMap.map[4][4] = block;
-	savedMap.map[3][9] = block;
+	savedMap.map[9][3] = block;
 	savedMap.map[6][6] = block;
-	savedMap.map[7][5] = block;
-	savedMap.map[9][8] = block;
-	savedMap.map[0][0] = goal;
-	savedMap.map[7][6] = player;
-	savedMap.startPos.x = 7;
-	savedMap.startPos.y = 6;
+	savedMap.map[5][7] = block;
+	savedMap.map[8][9] = block;
+
+	savedMap.startPos.x = 6;
+	savedMap.startPos.y = 7;
+	savedMap.map[savedMap.startPos.y][savedMap.startPos.x] = player;
+
+	savedMap.goalPos.x = 0;
+	savedMap.goalPos.y = 0;
+	savedMap.map[savedMap.goalPos.y][savedMap.goalPos.x] = goal;
+
 }
 
 void initMap(int height, int width) {
 	free(savedMap.map);
 
+	savedMap.size.x = width;
+	savedMap.size.y = height;
 
-
-	savedMap.map = (char**)malloc(sizeof(char*)*height);
-	for (int i = 0; i < height; i++)
+	savedMap.map = (char**)malloc(sizeof(char*)*savedMap.size.y);
+	for (int i = 0; i < savedMap.size.y; i++)
 	{
-		*(savedMap.map + i) = (char*)malloc(sizeof(char)*width);
+		*(savedMap.map + i) = (char*)malloc(sizeof(char)*savedMap.size.x);
 	}
 
 	//init savedMap
-	for (int y = 0; y < height; y++)
+	for (int y = 0; y < savedMap.size.y; y++)
 	{
-		for (int x = 0; x < width; x++)
+		for (int x = 0; x < savedMap.size.x; x++)
 		{
 			savedMap.map[y][x] = 0;
 		}
 	}
+
+	savedMap.startPos.x = 0;
+	savedMap.startPos.y = 0;
+	savedMap.map[savedMap.startPos.y][savedMap.startPos.x] = player;
+
+	savedMap.goalPos.x = 0;
+	savedMap.goalPos.y = 1;
+	savedMap.map[savedMap.goalPos.y][savedMap.goalPos.x] = goal;
 }
+
+void freeMap(char** map, struct point size) {
+
+	for (int i = 0; i < size.y; i++)
+	{
+		free(map[i]);
+	}
+	free(map);
+}
+
+
 void newLevelProg() {
 	int height = 0;
 	int width = 0;
@@ -261,14 +282,14 @@ void newLevelProg() {
 
 void lvlEditorProg() {
 	int quitFlag = 0;
-
+	struct gameMap *level = cloneLevel(savedMap);
 	struct point pointer;
 	pointer.x = 0;
 	pointer.y = 0;
 
 	do
 	{
-		drawMap(pointer);
+		drawMap(pointer, level->map, level->size);
 		printf("\n1: block 2: player 3:goal\n Enter: save");
 		int s = getInput();
 		switch (s)
@@ -276,25 +297,28 @@ void lvlEditorProg() {
 		case LEFT:
 		{
 			//	pointer.x = --pointer.x >= 0 ? pointer.x%mapDimention : mapDimention - pointer.x;
-			pointer.x = (--pointer.x >= 0 ? pointer.x : mapDimention + pointer.x) % mapDimention;
+			pointer.x = (--pointer.x >= 0 ? pointer.x : level->size.x + pointer.x) % level->size.x;
 		}
 		break;
 		case RIGHT:
 		{
-			pointer.x = ++pointer.x%mapDimention;
+			pointer.x = ++pointer.x%level->size.x;
 		}
 		break;
 		case UP:
 		{
 			//pointer.y = --pointer.y >= 0 ? pointer.y%mapDimention : mapDimention - pointer.y;
-			pointer.y = (--pointer.y >= 0 ? pointer.y : mapDimention + pointer.y) % mapDimention;
+			pointer.y = (--pointer.y >= 0 ? pointer.y : level->size.y + pointer.y) % level->size.y;
 		}
 		break;
 		case DOWN:
 		{
-			pointer.y = ++pointer.y%mapDimention;
+			pointer.y = ++pointer.y%level->size.y;
 		}
 		break;
+		case ENTER:
+			//freeLevel(&savedMap);
+			savedMap = *level;
 		case ESC:
 		{
 			quitFlag = 1;
@@ -302,16 +326,27 @@ void lvlEditorProg() {
 		break;
 
 		case BACK_SPACE:
-			savedMap.map[pointer.x][pointer.y] = empty;
+			if (level->map[pointer.y][pointer.x] == block)
+				level->map[pointer.y][pointer.x] = empty;
 			break;
 		case _1:
-			savedMap.map[pointer.x][pointer.y] = block;
+			if (level->map[pointer.y][pointer.x] == empty)
+				level->map[pointer.y][pointer.x] = block;
+			else
+				level->map[pointer.y][pointer.x] = empty;
 			break;
 		case _2:
-			savedMap.map[pointer.x][pointer.y] = player;
+			level->map[level->startPos.y][level->startPos.x] = empty;
+			level->startPos.x = pointer.x;
+			level->startPos.y = pointer.y;
+			level->map[level->startPos.y][level->startPos.x] = player;
+
 			break;
 		case _3:
-			savedMap.map[pointer.x][pointer.y] = goal;
+			level->map[level->goalPos.y][level->goalPos.x] = empty;
+			level->goalPos.x = pointer.x;
+			level->goalPos.y = pointer.y;
+			level->map[level->goalPos.y][level->goalPos.x] = goal;
 			break;
 		default:
 			printf("%d", s);
@@ -322,126 +357,133 @@ void lvlEditorProg() {
 	} while (!quitFlag);
 }
 
-void drawMap(struct point pointer) {
+void drawMap(struct point pointer, char **map, struct point size) {
 	//draw map
 	int x, y;
 	clrscr();
-	for (y = 0; y < mapDimention; y++)
+	for (y = 0; y < size.y; y++)
 	{
-		for (x = 0; x < mapDimention; x++)
+		for (x = 0; x < size.x; x++)
 		{
-			//else if (goal.x == x && goal.y == y) {
-			//	printf("(W)");
-			//}
-			//else
+			switch (map[y][x])
 			{
-				switch (savedMap.map[x][y])
-				{
-				case 0:
-					if (x == pointer.x && y == pointer.y)
-						printHighlighted(" * ");
-					else
-						printf(" * ");
-					break;
-				case 1:
-					if (x == pointer.x && y == pointer.y)
-						printHighlighted("[#]");
-					else
-						printf("[#]");
-					break;
-				case 2:
-					if (x == pointer.x && y == pointer.y)
-						printHighlighted("(W)");
-					else
-						printf("(W)");
-					break;
-				case 3:
-					printHighlighted(":-)");
-					break;
-				default:
-					break;
-				}
+			case empty:
+				if (x == pointer.x && y == pointer.y)
+					printHighlighted(" * ");
+				else
+					printf(" * ");
+				break;
+			case block:
+				if (x == pointer.x && y == pointer.y)
+					printHighlighted("[#]");
+				else
+					printf("[#]");
+				break;
+			case goal:
+				if (x == pointer.x && y == pointer.y)
+					printHighlighted("(W)");
+				else
+					printf("(W)");
+				break;
+			case player:
+				printHighlighted(":-)");
+				break;
+			default:
+				break;
 			}
 		}
 		printf("\n");
 	}
 }
 
-void getPLayerGoalPos(struct point *playerPos, struct point *goalPos) {
+struct gameMap *cloneLevel(struct gameMap level) {
+	struct gameMap* lvlCpy = (struct gameMap*) malloc(sizeof(struct gameMap));
+	*lvlCpy = level;
 
-	int x = 0;
-	int y = 0;
+	char ** newMap = (char**)malloc(sizeof(char*)*lvlCpy->size.y);
+	for (int i = 0; i < lvlCpy->size.y; i++)
+	{
+		*(newMap + i) = (char*)malloc(sizeof(char)*lvlCpy->size.x);
+	}
+	//copy to newMap
+	for (int y = 0; y < lvlCpy->size.y; y++)
+	{
+		for (int x = 0; x < lvlCpy->size.x; x++)
+		{
+			newMap[y][x] = level.map[y][x];
+		}
+	}
 
-
-
+	lvlCpy->map = newMap;
+	return lvlCpy;
 }
 
-
-char **cloneMap(char **map) {
-	return map;
+void freeLevel(struct gameMap *level) {
+	freeMap(level->map, level->size);
+	free(level);
 }
 
 void firstGameProg() {
 
 	//	int gameMap[mapDimention][mapDimention] = { 0 };
-	char **map = cloneMap(savedMap.map);
-	struct point playerPos = savedMap.startPos;
-	map[playerPos.x][playerPos.y] = player;
+	struct gameMap *level = cloneLevel(savedMap);
+	char **map = level->map;
+	struct point playerPos = level->startPos;
 	int gameQuitFlag = 0;
 	do
 	{
 		int won = 0;
-		drawMap(playerPos);
+		drawMap(playerPos, map, level->size);
 
 		//handle input
 		switch (getInput())
 		{//"\t"
 		case LEFT:
 		{
-			while ((playerPos.x - 1) >= 0 && map[playerPos.x - 1][playerPos.y] == empty)
+			struct point start = playerPos;
+			while ((playerPos.x - 1) >= 0 && map[playerPos.y][playerPos.x - 1] != block)
 			{
-				map[playerPos.x][playerPos.y] = empty;
 				playerPos.x--;
-				map[playerPos.x][playerPos.y] = player;
 			}
-			if ((playerPos.x - 1) >= 0)
-				won = map[playerPos.x - 1][playerPos.y] == goal ? 1 : 0;
+			won = map[playerPos.y][playerPos.x] == goal ? 1 : 0;
+			map[start.y][start.x] = empty;
+			map[playerPos.y][playerPos.x] = player;
 		}
 		break;
 		case RIGHT:
 		{
-			while ((playerPos.x + 1) < mapDimention && map[playerPos.x + 1][playerPos.y] == empty)
+			struct point start = playerPos;
+			while ((playerPos.x + 1) < level->size.x && map[playerPos.y][playerPos.x + 1] != block)
 			{
-				map[playerPos.x][playerPos.y] = empty;
 				playerPos.x++;
-				map[playerPos.x][playerPos.y] = player;
 			}
-			if ((playerPos.x + 1) < mapDimention)
-				won = map[playerPos.x + 1][playerPos.y] == goal ? 1 : 0;
+			won = map[playerPos.y][playerPos.x] == goal ? 1 : 0;
+			map[start.y][start.x] = empty;
+			map[playerPos.y][playerPos.x] = player;
 		}
 		break;
 		case UP:
 		{
-			while ((playerPos.y - 1) >= 0 && map[playerPos.x][playerPos.y - 1] == empty)
+			struct point start = playerPos;
+			while ((playerPos.y - 1) >= 0 && map[playerPos.y - 1][playerPos.x] != block)
 			{
-				map[playerPos.x][playerPos.y] = empty;
 				playerPos.y--;
-				map[playerPos.x][playerPos.y] = player;
 			}
-			if ((playerPos.y - 1) >= 0)
-				won = map[playerPos.x][playerPos.y - 1] == goal ? 1 : 0;
+			won = map[playerPos.y][playerPos.x] == goal ? 1 : 0;
+			map[start.y][start.x] = empty;
+			map[playerPos.y][playerPos.x] = player;
 		}
 		break;
 		case DOWN:
 		{
-			while ((playerPos.y + 1) < mapDimention && map[playerPos.x][playerPos.y + 1] == empty)
+			struct point start = playerPos;
+			while ((playerPos.y + 1) < level->size.y && map[playerPos.y + 1][playerPos.x] != block)
 			{
-				map[playerPos.x][playerPos.y] = empty;
 				playerPos.y++;
-				map[playerPos.x][playerPos.y] = player;
 			}
-			if ((playerPos.y + 1) < mapDimention)
-				won = map[playerPos.x][playerPos.y + 1] == goal ? 1 : 0;
+			won = map[playerPos.y][playerPos.x] == goal ? 1 : 0;
+			map[start.y][start.x] = empty;
+			map[playerPos.y][playerPos.x] = player;
 		}
 		break;
 		case ESC:
@@ -457,15 +499,16 @@ void firstGameProg() {
 			printf("!!!!!!!!!! Winner !!!!!!!!!!\n");
 			printf("Press any key to play again \n");
 			getch();
-			map[playerPos.x][playerPos.y] = empty;
-			playerPos = savedMap.startPos;
+
+			freeLevel(level);
+			level = cloneLevel(savedMap);
+			map = level->map;
+			playerPos = level->startPos;
 		}
-		//else {
-		//	printf("map[%d][%d]=%d\n", playerPos.y, playerPos.x, map[playerPos.y][playerPos.x]);
-		//	getch();
-		//}
 
 	} while (!gameQuitFlag);
+
+
 }
 
 int isPointEqual(struct point a, struct point b) {

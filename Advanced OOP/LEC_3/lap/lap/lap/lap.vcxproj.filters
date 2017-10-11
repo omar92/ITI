@@ -24,7 +24,7 @@
     <ClCompile Include="Game.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lineEditor.c">
+    <ClCompile Include="swipe.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
