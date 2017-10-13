@@ -1,5 +1,4 @@
-﻿  Game.c
-  Employee.c
+﻿  Employee.c
 d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(68): warning C4013: 'MenuProg' undefined; assuming extern returning int
 d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(78): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[20]'
 d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(78): warning C4024: 'strcpy': different types for formal and actual parameter 1
@@ -20,6 +19,5 @@ d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(460): warning C4996: 'getch': T
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
 d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(464): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
-  Generating Code...
   lap.vcxproj -> D:\ITI\Advanced OOP\LEC_3\lap\lap\Debug\lap.exe
   lap.vcxproj -> D:\ITI\Advanced OOP\LEC_3\lap\lap\Debug\lap.pdb (Full PDB)
