@@ -1,0 +1,291 @@
+{\rtf1\fbidis\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green176\blue80;}
+{\*\generator Riched20 10.0.15063}\viewkind4\uc1 
+\pard\ltrpar\sa200\sl276\slmult1\b\f0\fs22\lang9 C++\par
+OOP\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\ltrpar\fi-360\li720\sa200\sl276\slmult1\b0 polymorphism  \b\par
+{\pntext\f1\'B7\tab}\b0 encapsulation\b\par
+{\pntext\f1\'B7\tab}\b0 inheritence\b\par
+
+\pard\ltrpar\sa200\sl276\slmult1\b0\par
+\b relations between classes\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\ltrpar\fi-360\li720\sa200\sl276\slmult1\b0 agrecation \par
+{\pntext\f1\'B7\tab}composition\par
+
+\pard\ltrpar\sa200\sl276\slmult1\b access levels\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\ltrpar\fi-360\li720\sa200\sl276\slmult1\b0 Private\b\par
+{\pntext\f1\'B7\tab}\b0 Protected\b\par
+{\pntext\f1\'B7\tab}\b0 Public\b\par
+
+\pard\ltrpar\sa200\sl276\slmult1\par
+\b0 //------------------------------------------------------------------------------------------------------------\par
+\b Struct to class\b0\par
+//complex numbers\par
+\par
+class Complex \{\par
+\tab //Private by defult\par
+
+\pard\ltrpar\li720\sa200\sl276\slmult1\tab float real;\par
+\tab float img ;\par
+public:\par
+\tab void setReal (float);\par
+\tab void setImg(float i)\{   //<<<<<<<<<<<< inline function\par
+\tab\tab img = i;\par
+\tab\}\par
+\tab float getReal();\par
+\tab foat getImg()\{\par
+\tab\tab return img ;\par
+\tab\}\par
+\tab void print();\par
+
+\pard\ltrpar\sa200\sl276\slmult1\}\par
+\par
+void Complex::setReal(float f)\{\par
+\tab real = f ;\par
+\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1 float Complex::getReal(float f)\{\par
+\tab return real ;\par
+\}\par
+void Complex::print( )\{\par
+
+\pard\ltrpar\li720\sa200\sl276\slmult1 if(img>=0)\par
+\tab cout<<real<<"+"<<img<<"i" ;\par
+else\par
+\tab cout<<real<<"-"<<abs(img)<<"i" ;\par
+
+\pard\ltrpar\sa200\sl276\slmult1\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\par
+Complex addComplex ( Complex x, Complex y)\{\par
+\tab complex z;\par
+\tab z.setReal(x.getReal()+y.getReal());\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab z.setImg(x.getImg()+y.getImg());\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab return z;\par
+\}\par
+\par
+void main ()\{\par
+\tab Complex c1;\par
+\tab c1.setReal(5);\par
+\tab c1.setImg(7);\par
+\tab c1.Print( );\par
+\}\par
+\par
+\par
+//use refrence -------------------------------------------------------------------------------------------------\par
+\par
+void swapRef (int a , int & b)\par
+\{\par
+\tab int temp ;\par
+\tab temp = x:\par
+\tab x=y;\par
+\tab y=temp;\par
+\}\par
+main\par
+swapRef(a,b);\par
+//----------------------------------------------------------------------------------------------------------------\par
+\b class stack \par
+\par
+\b0 #define size = 5;\b\par
+\b0 class Stack\{\par
+\tab int *stk;\par
+\tab int tos ;  \cf1\i //top of stack\par
+\cf0\tab\i0 static int  counter ;\cf1\i\par
+\cf0\tab\i0 int size ;\i\par
+\i0 public:\par
+\tab Stack ()\{  \cf1\i //constructor\par
+
+\pard\ltrpar\li720\sa200\sl276\slmult1\cf0\i0\tab tos = 0;\par
+\tab size = 5;\par
+\tab stk = new int [size];\par
+\tab counter ++;\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab Stack (int z)\{   \cf1\i //constructor\par
+
+\pard\ltrpar\li720\sa200\sl276\slmult1\cf0\i0\tab tos = 0;\par
+\tab size = z;\par
+\tab stk = new int [size];\par
+\tab counter ++;\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab\}\par
+\tab Stack ( Stack&);\par
+\tab static int  getCounter ()\{ return counter ;\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab void push (int);\par
+\tab int pop( );\par
+\tab int getTos()\{ return tos ;\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\cf1\i\tab // friend  viewContent ( Stack );  // friend means that the function can access class \tab private variables \par
+
+\pard\ltrpar\sa200\sl276\slmult1\cf0\i0\tab\par
+\tab Friend Stack operator = ( Stack y);\par
+\tab ~ stack () \{    \cf1\i //distructor\par
+\cf0\i0\tab\tab delete [] stk ;\par
+
+\pard\ltrpar\li720\sa200\sl276\slmult1\tab counter --;\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab\}\par
+\};\par
+\par
+static int counter = 0; \cf1\i // to init  the static variable inside the class \par
+
+\pard\ltrpar\sa200\sl276\slmult1\cf0\i0 Stack Stack:: operator = ( Stack &z)\{ \par
+\cf1\i\tab\tab\tab\tab // use &z as i wont change any thing in z \line\tab\tab  \tab\tab //so i dont call create constructor and delete consturtor \tab\tab\tab\tab\tab //to create copy at z \par
+\cf0\i0\tab int i ;\par
+\tab delete []stk;\par
+\tab tos = z.tos ;\par
+\tab size = z.size ;\par
+\tab stk = new int[size];\par
+\tab for ( i=0 ; o<tos ;i++)\{\par
+\tab\tab stk[i] = z.stk[i];\par
+\tab\}\par
+\tab return *this;\par
+\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\par
+Stack::Stack(Stack &h)\{\cf1\i  // h is the original object that a new coppy is made from \par
+\cf0\i0\tab int i = 0;\par
+\tab this->tos = h.tos; \cf1\i //how to use this is like this line \par
+
+\pard\ltrpar\sa200\sl276\slmult1\cf0\i0\tab size = h.size ;\par
+\tab counter++;\par
+\tab this->stk = new int [size];\par
+\tab for (i =0 : i< tos;i++)\{\par
+\tab\tab stl[i] = h.stk[i];\par
+\tab\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\}\cf1\i\par
+\cf0\i0 void Stack::push(int n)\{4\par
+\tab if(tos == size)\{\par
+\tab\tab cout<<"stack full";\par
+\tab else\{\par
+\tab\tab stk[tos] = n;\par
+
+\pard\ltrpar\li1440\sa200\sl276\slmult1 tos++;\tab\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab\}\par
+\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1 int Stack::pop(int n)\{\par
+\tab int ret =-1;\par
+\tab if(tos <0)\{\par
+\tab\tab cout<<"stack empty";\par
+\tab else\{\par
+
+\pard\ltrpar\li1440\sa200\sl276\slmult1 tos--;\tab\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab\tab ret = stk[tos];\par
+\tab\}\par
+\tab return ret;\par
+\}\b\par
+
+\pard\ltrpar\sa200\sl276\slmult1\par
+\b0 void  viewContent ( Stack );\b\par
+\b0 void main (void)\par
+\{\par
+\tab Stack s1 ;\par
+\tab s1.push(7);\par
+\tab s1.push(9);\par
+\tab cout<<s1.pop();\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab cout<<Stack::getCounter();\par
+\tab viewContent (s1);\par
+
+\pard\ltrpar\sa200\sl276\slmult1\}\par
+\par
+void  viewContent ( Stack z );\par
+\{\par
+\tab int n = z.getTos();\par
+\tab int i=0;\par
+\tab for (i=0 ; i<n i++)\{\par
+\tab\tab cout << z.pop(  );\par
+\tab\}\par
+\}\par
+\par
+
+\pard\ltrpar\sa200\sl276\slmult1\b //\cf1\b0 Operation overloading \cf0  \b ----------------------------------------------------------------------------------\par
+
+\pard\ltrpar\sa200\sl276\slmult1\b0\par
+
+\pard\ltrpar\sa200\sl276\slmult1 class Complex \{\par
+\tab //Private by defult\par
+
+\pard\ltrpar\li720\sa200\sl276\slmult1\tab float real;\par
+\tab float img ;\par
+public:\par
+\tab Complex ( float a=0 , float b=0)\{real=a;img=b;\}\par
+\tab Complex(Complex &z) \{ real = z.real ; img = z.img);\par
+\tab\par
+\tab void setReal (float);\par
+\tab void setImg(float i)\{   //<<<<<<<<<<<< inline function\par
+\tab\tab img = i;\par
+\tab\}\par
+\tab float getReal();\par
+\tab foat getImg()\{\par
+\tab\tab return img ;\par
+\tab\}\par
+\tab void print();\par
+\par
+\b\tab\b0 Complex operator + (Complex) ;\cf1\i  \i0 //Operation overloading\par
+\cf0\tab Complex operator - (Complex) ;\cf1\i  \cf0\i0\tab\cf1 //Operation overloading\cf0\par
+\tab\par
+\cf1\i\tab // to handle something like 5.4 + Complex obj \cf0\i0\par
+\tab Friend Complex operator + ( float , Complex);\par
+\tab Friend Complex operator += ( float , Complex);\par
+\tab Friend Complex operator = ( Complex y);\par
+\tab Friend int operator = = ( Complex y);\par
+\tab Friend Complex operator ++( int); \cf1 //post increment\cf0\par
+\tab Friend Complex operator ++( ); \cf1 //pre increment\cf0\par
+
+\pard\ltrpar\sa200\sl276\slmult1\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\b\par
+
+\pard\ltrpar\sa200\sl276\slmult1\b0 Complex  Complex  :: operator + (Complex) \{\par
+\tab Complex result ;\par
+\tab result .real = real + h.real ;\par
+\tab result .img = img + h.img ;\par
+\tab return result ;\par
+\}\par
+\par
+Complex  Complex  :: operator - (float f) \{\par
+\tab Complex result ;\par
+\tab result .real = real + f;\par
+\tab result .img = img ;\par
+\tab return result ;\par
+\}\par
+Complex  Complex  :: operator +=  (Complex z) \{\par
+\tab *this = *this+z;\par
+\tab return *this ;\par
+\}\par
+Complex Complex :: operator = ( Complex y)\{\par
+
+\pard\ltrpar\li720\sa200\sl276\slmult1 real = y.real ;\par
+img = y.img ;\par
+
+\pard\ltrpar\sa200\sl276\slmult1\tab return *this ;\par
+\}\par
+int Complex :: operator = ( Complex y)\{\par
+\tab return ((real == z.real)&&(img == z.img));\par
+\}\par
+Complex Complex :: operator ++ ( )\{ \cf1\i //preincrement\cf0\par
+\i0\tab real++;\par
+\tab return *this;\par
+\}\par
+\par
+Complex Complex :: operator ++ (int )\{ \cf1\i //postIncrement\cf0\i0\par
+\tab Complex  r = *this ;\par
+\tab real++;\par
+\tab return t;\par
+\}\par
+
+\pard\ltrpar\sa200\sl276\slmult1\b\par
+}
+ 
