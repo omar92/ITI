@@ -102,7 +102,7 @@
 //		{
 //			selected = length - 1;
 //		}
-//
+//		break;
 //		case ENTER: {
 //			clrscr();
 //
@@ -116,7 +116,7 @@
 //				//	getch();
 //			}
 //		}
-//					break;
+//		break;
 //		case ESC:
 //		{
 //			quit = 1;
@@ -126,6 +126,7 @@
 //			break;
 //		}
 //	} while (!quit);
+//  free(menu);
 //	return 0;
 //}
 //

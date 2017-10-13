@@ -66,3 +66,11 @@ unsigned char getKey() {
 void clrscr() {
 	system("cls");
 }
+
+void swapInt(int*a, int*b) {
+	int t;
+	t = *a;
+	*a = *b;
+	*b = t;
+
+}
