@@ -1,23 +1,5 @@
-﻿  Employee.c
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(68): warning C4013: 'MenuProg' undefined; assuming extern returning int
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(78): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[20]'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(78): warning C4024: 'strcpy': different types for formal and actual parameter 1
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(79): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(int *)'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(82): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[20]'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(82): warning C4024: 'strcpy': different types for formal and actual parameter 1
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(83): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(int *)'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(86): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[20]'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(86): warning C4024: 'strcpy': different types for formal and actual parameter 1
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(87): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(int *)'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(90): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[20]'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(90): warning C4024: 'strcpy': different types for formal and actual parameter 1
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(126): warning C4013: 'getInput' undefined; assuming extern returning int
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(216): warning C4133: 'function': incompatible types - from 'int *' to 'char *'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(216): warning C4133: 'function': incompatible types - from 'int *' to 'const char *'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(247): warning C4013: 'insertNodeSorted' undefined; assuming extern returning int
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(460): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
-d:\iti\advanced oop\lec_3\lap\lap\lap\employee.c(464): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
+﻿  sort.c
+  linkedList.c
+  Generating Code...
   lap.vcxproj -> D:\ITI\Advanced OOP\LEC_3\lap\lap\Debug\lap.exe
   lap.vcxproj -> D:\ITI\Advanced OOP\LEC_3\lap\lap\Debug\lap.pdb (Full PDB)

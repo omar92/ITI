@@ -1,0 +1,277 @@
+{\rtf1\fbidis\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;\red43\green145\blue175;\red128\green128\blue128;}
+{\*\generator Riched20 10.0.15063}\viewkind4\uc1 
+\pard\ltrpar\sa200\sl276\slmult1\b\f0\fs22\lang9 RelationShips\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\ltrpar\fi-360\li720\sa200\sl276\slmult1 association  \b0\tab [ ]-------------------[ ]\par
+{\pntext\f2\'B7\tab}\b aggregation \tab\b0 [ ]--------< >--------[ ]\par
+{\pntext\f2\'B7\tab}\b composition      \b0 [ ]--------<#>-------[ ]\par
+{\pntext\f2\'B7\tab}\b inheritance  \tab\b0 [ ]>------------------[ ]\par
+
+\pard\ltrpar\sa200\sl276\slmult1\par
+//--------------------------------------------------------------------------------------------------------------\par
+\b COMPOSITION \par
+\cf1\b0\f1\fs19 //lec 6\cf2\par
+\cf3 class\cf2  \cf4 Point\cf2  \{\par
+\tab\cf3 float\cf2  x, y;\par
+\cf3 public\cf2 :\par
+\tab Point(\cf3 float\cf2  \cf5 x1\cf2  = 0, \cf3 float\cf2  \cf5 y1\cf2  = 0) \{\par
+\tab\tab x = \cf5 x1\cf2 ; y = \cf5 y1\cf2 ;\par
+\tab\}\par
+\tab Point(\cf4 Point\cf2  &\cf5 p\cf2 ) \{\par
+\tab\tab x = \cf5 p\cf2 .x; y = \cf5 p\cf2 .y;\par
+\tab\}\par
+\tab\cf3 void\cf2  setX(\cf3 float\cf2  \cf5 x1\cf2 ) \{ x = \cf5 x1\cf2 ; \}\par
+\tab\cf3 void\cf2  setY(\cf3 float\cf2  \cf5 y1\cf2 ) \{ x = \cf5 y1\cf2 ; \}\par
+\tab\cf3 float\cf2  getX() \{ \cf3 return\cf2  x; \}\par
+\tab\cf3 float\cf2  getY() \{ \cf3 return\cf2  y; \}\par
+\};\par
+\par
+\cf3 class\cf2  \cf4 Circle\cf2\par
+\{\par
+\tab\cf3 int\cf2  radius;\par
+\tab\cf4 Point\cf2  center;\par
+\cf3 public\cf2 :\par
+\tab\cf1 //Circle() :center(50,50) // : == empedded opeject  // center(50,50) initialise defult val in constructor //COMPOSITION\cf2\par
+\tab\cf1 //\{\cf2\par
+\tab\cf1 //\tab radius = 25;\cf2\par
+\tab\cf1 //\};\cf2\par
+\tab\cf1 //Circle(int x1 , int y1 , int r) :center(x1, y1) // to construct Point call before  the constructor of Circle\cf2\par
+\tab\cf1 //\{\cf2\par
+\tab\cf1 //\tab radius = r;\cf2\par
+\tab\cf1 //\};\cf2\par
+\tab Circle(\cf3 int\cf2  \cf5 x1\cf2  = 50, \cf3 int\cf2  \cf5 y1\cf2  = 50, \cf3 int\cf2  \cf5 r\cf2  = 25) :center(\cf5 x1\cf2 , \cf5 y1\cf2 ) \cf1 // all in one\cf2\par
+\tab\{\par
+\tab\tab radius = \cf5 r\cf2 ;\par
+\tab\};\par
+\tab\cf3 void\cf2  draw() \{\par
+\tab\tab circle(center.getX(), center.getY(), radius);\par
+\tab\}\par
+\par
+\cf3 private\cf2 :\par
+\};\par
+\par
+\cf3 class\cf2  \cf4 Rectangle\cf2\par
+\{\par
+\tab\cf4 Point\cf2  ul;\par
+\tab\cf4 Point\cf2  lr;\par
+\cf3 public\cf2 :\par
+\tab Rectangle(\cf3 int\cf2  \cf5 x1\cf2  = 50, \cf3 int\cf2  \cf5 y1\cf2  = 50, \cf3 int\cf2  \cf5 x2\cf2  = 50, \cf3 int\cf2  \cf5 y2\cf2  = 50) :ul(\cf5 x1\cf2 , \cf5 y1\cf2 ), lr(\cf5 x1\cf2 , \cf5 y2\cf2 )\par
+\tab\{\par
+\tab\};\par
+\tab Rectangle(\cf4 Point\cf2  \cf5 p1\cf2 , \cf4 Point\cf2  \cf5 p2\cf2 ) :ul(\cf5 p1\cf2 ), lr(\cf5 p2\cf2 ) \cf1 // all in one\cf2\par
+\tab\{\par
+\tab\};\par
+\par
+\tab\cf3 void\cf2  draw() \{\par
+\tab\tab rectangle(ul.getX(), ul.getY(), lr.getX(), lr.getY());\par
+\tab\}\par
+\};\par
+\par
+\cf3 class\cf2  \cf4 Line\cf2\par
+\{\par
+\tab\cf4 Point\cf2  p1;\par
+\tab\cf4 Point\cf2  p2;\par
+\cf3 public\cf2 :\par
+\tab Line(\cf3 int\cf2  \cf5 x1\cf2  = 50, \cf3 int\cf2  \cf5 y1\cf2  = 50, \cf3 int\cf2  \cf5 x2\cf2  = 50, \cf3 int\cf2  \cf5 y2\cf2  = 50) :p1(\cf5 x1\cf2 , \cf5 y1\cf2 ), p2(\cf5 x1\cf2 , \cf5 y2\cf2 )\par
+\tab\{\par
+\tab\};\par
+\tab Line(\cf4 Point\cf2  \cf5 p1\cf2 , \cf4 Point\cf2  \cf5 p2\cf2 ) :p1(\cf5 p1\cf2 ), p2(\cf5 p2\cf2 ) \cf1 // all in one\cf2\par
+\tab\{\par
+\tab\};\par
+\tab\cf3 void\cf2  draw() \{\par
+\tab\tab line(p1.getX(), p1.getY(), p2.getX(), p2.getY());\par
+\tab\}\par
+\};\par
+\par
+\par
+\cf3 class\cf2  \cf4 Picture\cf2\par
+\{\par
+\tab\cf3 int\cf2  cNum;\par
+\tab\cf3 int\cf2  lNum;\par
+\tab\cf3 int\cf2  rNum;\par
+\par
+\tab\cf4 Circle\cf2  *pCircles;\par
+\tab\cf4 Rectangle\cf2  *pRects;\par
+\tab\cf4 Line\cf2  *pLines;\par
+\par
+\cf3 public\cf2 :\par
+\tab Picture(\cf3 int\cf2  \cf5 c\cf2  = 0, \cf3 int\cf2  \cf5 r\cf2  = 0, \cf3 int\cf2  \cf5 l\cf2  = 0) \{\par
+\tab\tab cNum = \cf5 c\cf2 ; rNum = \cf5 r\cf2 ; lNum = \cf5 l\cf2 ;\par
+\tab\tab pCircles = 0; pRects = 0; pLines = 0;\par
+\tab\}\par
+\tab Picture(\cf3 int\cf2  \cf5 c\cf2 , \cf3 int\cf2  \cf5 r\cf2 , \cf3 int\cf2  \cf5 l\cf2 , \cf4 Circle\cf2  *\cf5 pc\cf2 , \cf4 Rectangle\cf2  *\cf5 pr\cf2 , \cf4 Line\cf2  * \cf5 pl\cf2 ) \{\par
+\tab\tab cNum = \cf5 c\cf2 ; rNum = \cf5 r\cf2 ; lNum = \cf5 l\cf2 ;\par
+\tab\tab pCircles = \cf5 pc\cf2 ; pRects = \cf5 pr\cf2 ; pLines = \cf5 pl\cf2 ;\par
+\tab\}\par
+\par
+\tab\cf3 void\cf2  setCircles(\cf3 int\cf2  \cf5 c\cf2 , \cf4 Circle\cf2  *\cf5 pc\cf2 ) \{\par
+\tab\tab cNum = \cf5 c\cf2 ;\par
+\tab\tab pCircles = \cf5 pc\cf2 ;\par
+\tab\}\par
+\par
+\tab\cf3 void\cf2  paint() \{\par
+\tab\tab\cf3 int\cf2  i;\par
+\tab\tab\cf3 for\cf2  ( i = 0; i < cNum; i++)\par
+\tab\tab\{\par
+\tab\tab\tab pCircles[i].draw();\par
+\tab\tab\}\par
+\tab\tab\cf3 for\cf2  (i = 0; i < rNum; i++)\par
+\tab\tab\{\par
+\tab\tab\tab pRects[i].draw();\par
+\tab\tab\}\par
+\tab\tab\cf3 for\cf2  (i = 0; i < lNum; i++)\par
+\tab\tab\{\par
+\tab\tab\tab pLines[i].draw();\par
+\tab\tab\}\par
+\tab\}\par
+\tab ~Picture() \{\par
+\tab\}\par
+\cf3 private\cf2 :\par
+\};\par
+\par
+\cf3 void\cf2  circle(\cf3 int\cf2 , \cf3 int\cf2 , \cf3 int\cf2 );\par
+\cf3 void\cf2  rectangle(\cf3 int\cf2 , \cf3 int\cf2 , \cf3 int\cf2 , \cf3 int\cf2 );\par
+\cf3 void\cf2  line(\cf3 int\cf2 , \cf3 int\cf2 , \cf3 int\cf2 , \cf3 int\cf2 );\par
+\cf3 void\cf2  main() \{\par
+\tab\cf4 Circle\cf2  c1(100, 100, 50);\par
+\tab c1.draw();\par
+\tab\cf4 Circle\cf2  c2[2] = \{\par
+\tab\tab\cf4 Circle\cf2 (100,100,10),\par
+\tab\tab\cf4 Circle\cf2 (50,50,20)\par
+\tab\};\par
+\tab\cf4 Picture\cf2  p1;\par
+\tab p1.setCircles(2, c2);\par
+\tab p1.paint();\par
+\}\par
+//------------------------------------------------------------------------------\b inheretence + ovverriding \par
+\cf3\b0 class\cf2  \cf4 Base\cf2\par
+\{\par
+\cf3 protected\cf2 :\par
+\tab\cf3 int\cf2  a, b;\par
+\cf3 public\cf2 :\par
+\tab Base(\cf3 int\cf2  \cf5 x\cf2  = 0, \cf3 int\cf2  \cf5 y\cf2  = 0) \{\par
+\tab\tab a = \cf5 x\cf2 ; b = \cf5 y\cf2 ;\par
+\tab\}\par
+\tab\cf3 void\cf2  setA(\cf3 int\cf2  \cf5 x\cf2 ) \{ a = \cf5 x\cf2 ; \}\par
+\tab\cf3 void\cf2  setA(\cf3 int\cf2  y) \{ b = x; \}\par
+\tab\cf3 int\cf2  getA() \{ \cf3 return\cf2  a; \}\par
+\tab\cf3 int\cf2  getB() \{ \cf3 return\cf2  b; \}\par
+\par
+\tab\cf3 int\cf2  calculateSum() \{\par
+\tab\tab\cf3 return\cf2  a + b;\par
+\tab\}\par
+\};\par
+\cf3 class\cf2  \cf4 Derived\cf2  : \cf3 public\cf2  \cf4 Base\cf2\par
+\{\par
+\tab\cf3 int\cf2  c;\par
+\cf3 public\cf2 :\par
+\tab Derived(\cf3 int\cf2  \cf5 c1\cf2  = 0):\cf4 Base\cf2 (0,0) \{\par
+\tab\tab c = \cf5 c1\cf2 ;\par
+\tab\}\par
+\tab Derived(\cf3 int\cf2  \cf5 x1\cf2 , \cf3 int\cf2  \cf5 y1\cf2 , \cf3 int\cf2  \cf5 c1\cf2 ) :\cf4 Base\cf2 (\cf5 x1\cf2 , \cf5 y1\cf2 )\par
+\tab\{\par
+\tab\tab c = \cf5 c1\cf2 ;\par
+\tab\}\par
+\tab\cf3 int\cf2  calculateSum() \{\par
+\tab\tab //diffrent ways to return\par
+\tab\tab\cf1 //return a + b + c; \cf2\par
+\tab\tab\cf1 //return getA() + getB() + c;\cf2\par
+\tab\tab\cf3 return\cf2  \cf4 Base\cf2 ::calculateSum() + c;\par
+\tab\}\par
+\cf3 private\cf2 :\par
+\};\par
+\par
+\cf3 void\cf2  main() \{\par
+\tab\cf3 int\cf2  x, y, z;\par
+\tab\cf4 Base\cf2  b1(3, 5);\par
+\tab b1.calculateSum();\par
+\par
+\tab\cf4 Derived\cf2  obj(2, 3, 5);\par
+\tab obj.calculateSum();\par
+\}\b\par
+\b0 //------------------------------------------------------------------------------\b inheretence Advanced example\par
+\cf3\b0 class\cf2   \cf4 GeoShape\cf2\par
+\{\par
+\cf3 protected\cf2 :\par
+\tab\cf3 float\cf2  dim1, dim2;\par
+\cf3 public\cf2 :\par
+\tab GeoShape(\cf3 float\cf2  \cf5 f1\cf2 , \cf3 float\cf2  \cf5 f2\cf2 ) \{\par
+\tab\tab dim1 = \cf5 f1\cf2 ; dim2 = \cf5 f2\cf2 ;\par
+\tab\}\par
+\par
+\tab\cf3 void\cf2  setDim1(\cf3 float\cf2  \cf5 f1\cf2 ) \{\par
+\tab\tab dim1 = \cf5 f1\cf2 ;\par
+\tab\}\par
+\par
+\tab\cf3 void\cf2  setDim2(\cf3 float\cf2  \cf5 f2\cf2 ) \{\par
+\tab\tab dim2 = \cf5 f2\cf2 ;\par
+\tab\}\par
+\par
+\tab\cf3 float\cf2  getDim1() \{ \cf3 return\cf2  dim1; \}\par
+\tab\cf3 float\cf2  getDim2() \{ \cf3 return\cf2  dim2; \}\par
+\par
+\tab\cf3 float\cf2  calculatedArea() \{\par
+\tab\tab\cf3 return\cf2  0.0;\par
+\tab\}\par
+\};\par
+\par
+\cf3 class\cf2  \cf4 Rectangle\cf2  : \cf3 public\cf2   \cf4 GeoShape\cf2\par
+\{\par
+\cf3 public\cf2 :\par
+\tab Rectangle(\cf3 int\cf2  \cf5 l\cf2 , \cf3 int\cf2  \cf5 w\cf2 ) :\cf4 GeoShape\cf2 (\cf5 l\cf2 , \cf5 w\cf2 ) \{\par
+\tab\}\par
+\par
+\tab\cf3 float\cf2  calculatedArea() \{\par
+\tab\tab\cf3 return\cf2  dim1*dim2;\par
+\tab\}\par
+\par
+\tab\cf3 void\cf2  setRadius(\cf3 int\cf2  \cf5 r\cf2 ) \{\par
+\tab\tab dim1 = \cf5 r\cf2 ; dim2 = \cf5 r\cf2 ;\par
+\tab\}\par
+\};\par
+\par
+\cf3 class\cf2  \cf4 Circle\cf2  : \cf3 protected\cf2   \cf4 GeoShape\cf2\par
+\{\par
+\cf3 public\cf2 :\par
+\tab Circle(\cf3 int\cf2  \cf5 r\cf2 ) :\cf4 GeoShape\cf2 (\cf5 r\cf2 , \cf5 r\cf2 ) \{\par
+\tab\}\par
+\par
+\tab\cf3 float\cf2  calculatedArea() \{\par
+\tab\tab\cf3 return\cf2  (22 / 7)*dim1*dim2;\par
+\tab\}\par
+\par
+\tab\cf3 void\cf2  setRadius(\cf3 int\cf2  \cf5 r\cf2 ) \{\par
+\tab\tab dim1 = \cf5 r\cf2 ; dim2 = \cf5 r\cf2 ;\par
+\tab\}\par
+\};\par
+\par
+\cf3 class\cf2  \cf4 Square\cf2  : \cf3 protected\cf2   \cf4 Rectangle\cf2\par
+\{\par
+\cf3 public\cf2 :\par
+\tab Square(\cf3 int\cf2  \cf5 l\cf2 ) :\cf4 Rectangle\cf2 (\cf5 l\cf2 , \cf5 l\cf2 ) \{\par
+\tab\}\par
+\par
+\tab\cf3 void\cf2  setLength(\cf3 int\cf2  \cf5 l\cf2 ) \{\par
+\tab\tab dim1 = \cf5 l\cf2 ; dim2 = \cf5 l\cf2 ;\par
+\tab\}\par
+\par
+\tab\cf3 float\cf2  calculatedArea() \{\par
+\tab\tab\cf3 return\cf2  \cf4 Rectangle\cf2 ::calculatedArea();\par
+\tab\}\par
+\};\par
+\par
+\cf3 void\cf2  main() \{\par
+\tab\cf4 Circle\cf2  c1(5);\par
+\tab c1.calculatedArea();\par
+\par
+\tab\cf1 //c1.setDim1() // is worng -- so in circle  we changed inheretence of GeoShape to protected\cf2\par
+\tab\cf1 //  even if we will override setDim functions original function can still b accessed throught \cf2\par
+\tab\cf1 // c1.GeoShape::setDim1(2);\cf2\par
+\tab\cf1 //so we must add the inheretence access level to protected to prevent this \cf2\par
+\tab c1.setRadius(20);\par
+\}\par
+\par
+\cf0\f0\fs22\par
+}
+ 

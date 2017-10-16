@@ -36,7 +36,7 @@
 //
 ////Variables --------------------------------------------------------------------------------------------------
 //
-//
+//char data[][20] = { "Name:","Age:","salary:","deduction:","Net:" };
 //void drawEmpData(struct point pos, struct point padding);
 //struct point get_pos(int index, int coloums, struct point pos, struct point padding);
 //int getCharIndex(char character, char string[], int length);
@@ -145,7 +145,7 @@
 //		{
 //			selected = length - 1;
 //		}
-//		break;
+//
 //		case ENTER: {
 //			clrscr();
 //
@@ -159,7 +159,7 @@
 //			//	//	getch();
 //			//}
 //		}
-//		break;
+//					break;
 //		case ESC:
 //		{
 //			quit = 1;
@@ -169,8 +169,7 @@
 //			break;
 //		}
 //	} while (!quit);
-//	return 0;	
-//	free(menu);
+//	return 0;
 //}
 //
 //struct employee *createNode() {

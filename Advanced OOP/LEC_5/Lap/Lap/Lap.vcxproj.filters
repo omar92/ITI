@@ -15,27 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="factorialLoop.c">
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Employee.c">
+    <ClCompile Include="oStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="swap.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="linkedList.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sort.c">
+    <ClCompile Include="linkedList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ITI.h">
+    <ClInclude Include="oMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="oStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

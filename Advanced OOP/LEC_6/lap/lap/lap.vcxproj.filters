@@ -15,28 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="factorialLoop.c">
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Employee.c">
+    <ClCompile Include="overriding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.c">
+    <ClCompile Include="inheretenceAdvanced.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="swap.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="linkedList.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sort.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ITI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

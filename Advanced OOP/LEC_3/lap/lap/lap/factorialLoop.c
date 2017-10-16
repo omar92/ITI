@@ -28,5 +28,5 @@
 //	if (num > 1)
 //		return num*getFactorialR(num-1);
 //	else
-//		return 1;
+//		return num;
 //}
