@@ -1,9 +1,0 @@
-﻿  main.c
-d:\iti\advanced oop\lec_2\licture\getinput\getinput\main.c(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-d:\iti\advanced oop\lec_2\licture\getinput\getinput\main.c(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-d:\iti\advanced oop\lec_2\licture\getinput\getinput\main.c(10): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
-d:\iti\advanced oop\lec_2\licture\getinput\getinput\main.c(13): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: see declaration of 'getch'
-  getInput.vcxproj -> D:\ITI\Advanced OOP\LEC_2\licture\getInput\Debug\getInput.exe
-  getInput.vcxproj -> D:\ITI\Advanced OOP\LEC_2\licture\getInput\Debug\getInput.pdb (Full PDB)

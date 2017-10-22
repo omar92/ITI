@@ -1,6 +1,0 @@
-﻿  main.c
-d:\iti\advanced oop\lec_1\projects\into\intro\intro\main.c(39): warning C4477: 'scanf' : format string '%C' requires an argument of type 'unsigned short *', but variadic argument 1 has type 'char *'
-  d:\iti\advanced oop\lec_1\projects\into\intro\intro\main.c(39): note: consider using '%hC' in the format string
-  d:\iti\advanced oop\lec_1\projects\into\intro\intro\main.c(39): note: consider using '%TC' in the format string
-  intro.vcxproj -> D:\ITI\Advanced OOP\LEC_1\Projects\into\intro\Debug\intro.exe
-  intro.vcxproj -> D:\ITI\Advanced OOP\LEC_1\Projects\into\intro\Debug\intro.pdb (Partial PDB)
