@@ -11,8 +11,8 @@ Vector2f transformedPoint(Vector2f p, float x, float y, float scalex = 1) {
 	p.y += y / 2;
 	return p;
 }
-float square(float x) {
-	return (x*x);
+float xSquare(float x) {
+	return abs(x*x);
 }
 int main() {
 	RenderWindow window;
@@ -43,7 +43,7 @@ int main() {
 		window.clear();
 		for (int x = -100; x < 100; x++)
 		{
-			float y = square(x);
+			float y = xSquare(x);
 			graph.append(transformedPoint(Vector2f(x, y), 400, 400,scale));
 		}
 

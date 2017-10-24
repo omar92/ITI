@@ -1,30 +1,30 @@
-//#include "LinkedList.h"
-//
-//template <class T>
-//LinkedLis<T>::LinkedList()
-//{
-//	pHead = 0;
-//	pTail = 0;
-//}
-//
-//template <class T>
-//void LinkedList<T>::addNode(node<T> * pNode)
-//{
-//	if (pHead == 0)
-//	{
-//		pHead = pNode;
-//		pTail = pNode;
-//		pNode->pPrev = 0;
-//		pNode->pNext = 0;
-//	}
-//	else {
-//		pNode->pPrev = pTail;
-//		pTail->pNext = pNode;
-//		pNode->pNext = 0;
-//		pTail = pNode;
-//	}
-//	length++;
-//}
+#include "LinkedList.h"
+
+template <class T>
+LinkedList<T>::LinkedList()
+{
+	pHead = 0;
+	pTail = 0;
+}
+
+template <class T>
+void LinkedList<T>::addNode(node<T> * pNode)
+{
+	if (pHead == 0)
+	{
+		pHead = pNode;
+		pTail = pNode;
+		pNode->pPrev = 0;
+		pNode->pNext = 0;
+	}
+	else {
+		pNode->pPrev = pTail;
+		pTail->pNext = pNode;
+		pNode->pNext = 0;
+		pTail = pNode;
+	}
+	length++;
+}
 //
 //template <class T>
 //void LinkedList<T>::print(void) {
@@ -54,17 +54,17 @@
 //	return pHeads;
 //}
 //
-//template <class T>
-//node<T> * LinkedList<T>::createNode(T data)
-//{
-//	node<T> * pNode = new node<T>();
-//	////fill data from user 
-//	//pNode->data = data;
-//	//pNode->pPrev = 0;
-//	//pNode->pNext = 0;
-//
-//	return pNode;
-//}
+template <class T>
+node<T> * LinkedList<T>::createNode(T data)
+{
+	node<T> * pNode = new node<T>();
+	//fill data from user 
+	pNode->data = data;
+	pNode->pPrev = 0;
+	pNode->pNext = 0;
+
+	return pNode;
+}
 //
 //template <class T>
 //int LinkedList<T>::deleteNode(T sData) {
